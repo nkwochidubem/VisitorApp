@@ -9,8 +9,8 @@ const router = require('./src/config/routes');
 const app = express();
 mongoose.Promise = global.Promise;
 
-// mongodb local connection mongodb://localhost/visitor-list
-mongoose.connect('mongodb+srv://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongodb.net/visitor-list', { useNewUrlParser: true }  , err => {
+// mongodb local connection mongodb://localhost/visitor-list mongodb+srv://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongodb.net/visitor-list
+mongoose.connect('mongodb://localhost/visitor-list', { useNewUrlParser: true }  , err => {
     if (err) throw err;
     console.log(`Successfully connected to database.`);
 });
