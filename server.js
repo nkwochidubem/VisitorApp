@@ -15,7 +15,7 @@ mongoose.connect('mongodb://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongod
     console.log(`Successfully connected to database.`);
 });
 
-const PORT = process.env.PORT || 3000;
+// const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded());
@@ -45,7 +45,7 @@ app.use((error, req, res) => {
 });
 
 
-app.listen(PORT, () => {
-    console.log(`server is listening on port: ${PORT}`);
+app.listen(process.env.PORT || 8080, () => {
+   // console.log(`server is listening on port: ${PORT}`);
 });
 
