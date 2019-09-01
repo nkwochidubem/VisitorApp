@@ -10,7 +10,7 @@ const app = express();
 mongoose.Promise = global.Promise;
 
 // mongodb local connection mongodb://localhost/visitor-list mongodb+srv://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongodb.net/visitor-list
-mongoose.connect('mongodb://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongodb.net/visitor-list', { useNewUrlParser: true }  , err => {
+mongoose.connect('process.env.MONGODB_URI || "mongodb://localhost:27017/test"', { useNewUrlParser: true }  , err => {
     if (err) throw err;
     console.log(`Successfully connected to database.`);
 });
