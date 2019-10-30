@@ -7,19 +7,29 @@ const path = require('path');
 
 const router = require('./src/config/routes');
 const app = express();
-mongoose.Promise = global.Promise;
 
-// mongodb local connection mongodb://localhost/visitor-list mongodb+srv://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongodb.net/visitor-list
-mongoose.connect('process.env.MONGODB_URI || "mongodb://localhost:27017/test"', { useNewUrlParser: true }  , err => {
-    if (err) throw err;
-    console.log(`Successfully connected to database.`);
+app.use((req,res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+  res.setHeader("Access-Control-Allow-Methods", "GET,POST,OPTIONS,PATCH,DELETE,PUT,HEAD");
+  next();
 });
 
-// const PORT = process.env.PORT || 3000;
+mongoose.Promise = global.Promise;
+
+// mongodb local connection mongodb://localhost/visitor-list
+// mongodb+srv://platform1470:<password>@vsitor-app-agkvz.mongodb.net/test?retryWrites=true&w=majority
+// mongodb+srv://nkwochidubem:icui4cu5517@cluster0-puljv.azure.mongodb.net/visitor-list  Working DB
+mongoose.connect('mongodb+srv://platform1470:icui4cu5517@vsitor-app-agkvz.mongodb.net/visitorApp', { useNewUrlParser: true }  , err => {
+    if (err) throw err;
+    console.log(`Successfully connected to Monogo database.`);
+});
+
+const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded());
-app.use(cors());
+// app.use(cors());
 app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, './public/')));
 app.use('/api', router);
@@ -45,7 +55,7 @@ app.use((error, req, res) => {
 });
 
 
-app.listen(process.env.PORT || 8080, () => {
-   // console.log(`server is listening on port: ${PORT}`);
+app.listen(process.env.PORT || 5000, () => {
+   console.log(`server is listening on port: ${PORT}`);
 });
 
